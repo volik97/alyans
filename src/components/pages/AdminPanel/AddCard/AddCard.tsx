@@ -118,7 +118,6 @@ function AddCard({item, closeModal}: {item?: IItem, closeModal?: (a: null) => vo
         const formData = new FormData();
         const formDataImg = prepareImgToSendOnServer(imgFiles, formData)
         formDataImg.append('body', JSON.stringify(data));
-        console.log(data)
         setLoading(true)
         const res = await axios.post(`https://skalliance.pro/${item ? 'edit':'save'}Card`, formData)
         if (res.status === 200){
@@ -141,7 +140,6 @@ function AddCard({item, closeModal}: {item?: IItem, closeModal?: (a: null) => vo
     const handleDeleteChange = (removedList: { id: string; name: string}[]) => {
         setSelectedOptions(removedList)
     }
-    console.log(data)
     return (
         <div className={` flex flex-col justify-center items-center py-20`}>
             <form ref={refForm} encType="multipart/form-data" onSubmit={handleSubmit} className={'flex flex-col gap-4 px-10'}>
@@ -150,6 +148,7 @@ function AddCard({item, closeModal}: {item?: IItem, closeModal?: (a: null) => vo
                 <label htmlFor={'description'} className={'text-white'}>Описание</label>
                 <textarea onChange={handleOnChange} placeholder={'Модульный детский сад на 100 мест к МБОУ «Плодовская СОШ»'} className={'h-40 p-2'} id={'description'} value={data.description}/>
                 <label htmlFor={'category'} className={'text-white'}>Категории</label>
+                <a className={'text-white'}>Категория которая находится в селекте первая, будет основной, она будет cодержаться в пути фотографий. Если категория изменится через редактирование, ничего страшного не случится, при изменении категорий пути переписываются. Фильтрация в каталоге работает теперь по всем категориям которые указаны для карточки.</a>
                 <Multiselect
                     emptyRecordMsg={'Нет категорий'}
                     options={options}
@@ -160,9 +159,12 @@ function AddCard({item, closeModal}: {item?: IItem, closeModal?: (a: null) => vo
                 />
                 {item &&
                     <div>
-                        <a className={'text-white'}>Текущий каталог фото</a>
+                        <div className={'flex flex-col gap-4'}>
+                            <a className={'text-white'}>Текущий каталог фото</a>
+                            <a className={'text-red-500'}>Фотографии с одинаковыми именами не добавлять! Фото, которые будут загружаться из раздела "Фото объекта" здесь не отображются, здесь только те фотографии, которые уже были добавлены в объект</a>
+                        </div>
                         <div className={'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4'}>
-                            {urlsImages?.map((item:string) =>
+                            {urlsImages?.map((item: string) =>
                                 <div className={'flex flex-col justify-center items-center gap-1 relative'}>
                                     <img src={item}/>
                                     <figcaption className={'text-white flex gap-4'}>{item.split('/').at(-1)}<span
@@ -177,7 +179,7 @@ function AddCard({item, closeModal}: {item?: IItem, closeModal?: (a: null) => vo
                 <input type={'file'} onChange={handleOnChange} className={'text-white'} id={'img'}/>
                 <label htmlFor={'catalog'} className={'text-white'}>Фото объекта (файлы должны быть в формате ".webp" и иметь нназвание начиная с "1" и т.д. Например: "1.webp", "2.webp")</label>
                 <input multiple type={'file'} onChange={handleOnChange} className={'text-white'} id={'catalog'}/>
-                <label htmlFor={'date'} className={'text-white'}>Дата (год-месяц-день)</label>
+                <label htmlFor={'date'} className={'text-white'}>Дата (<a className={'text-red-500'}>{'ЭТО ЕДИНСТВЕННЫЙ ВАЛИДНЫЙ ФОРМАТ! >>> '}</a>год-месяц-день)</label>
                 <input onChange={handleOnChange} value={data.date} id={'date'} placeholder={'1997-10-28'} className={'p-2'}/>
                 <label htmlFor={'floors'} className={'text-white'}>Этажность</label>
                 <input onChange={handleOnChange} value={data.floors} className={'p-2'} id={'floors'} placeholder={'2'}/>

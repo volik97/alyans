@@ -13,7 +13,6 @@ function NewsCardFull({smallDescription, date, source, text, title, cover, id, u
     id: string,
     underTitlePhoto: string,
 }) {
-    console.log(source)
     return (
         <div>
             <Link to={'/news'} className={'lg:hidden'}>
