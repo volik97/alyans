@@ -39,7 +39,7 @@ export default function Form({closeForm, subject}: {closeForm?: (a:boolean) => v
         });
         const {success} = await res.json();
         if(success) {
-            const res = await fetch("https://skalliance.pro/",
+            const res = await fetch("https://skalliance.pro/sendEmail",
                 {
                     method: "POST",
                     body: JSON.stringify(dataForm),
