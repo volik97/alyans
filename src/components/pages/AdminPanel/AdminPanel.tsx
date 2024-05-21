@@ -9,7 +9,7 @@ function AdminPanel() {
         <div className={'pt-32'}>
             <ul className={'flex w-full flex-row gap-x-40 justify-evenly'}>
                 <li onClick={() => setActiveMenu('addCard')} className={`text-3xl hover:cursor-pointer hover:text-base-zinc ${activeMenu === 'addCard' ? 'text-base-zinc' : 'text-white'}`}>Добавить карточку проекта</li>
-                <li onClick={() => setActiveMenu('editor')} className={`text-3xl hover:cursor-pointer hover:text-base-zinc ${activeMenu === 'editor' ? 'text-base-zinc' : 'text-white'}`}>Удалить / Скрыть</li>
+                <li onClick={() => setActiveMenu('editor')} className={`text-3xl hover:cursor-pointer hover:text-base-zinc ${activeMenu === 'editor' ? 'text-base-zinc' : 'text-white'}`}>Скрыть/Удалить/Редактировать </li>
 
                 <li onClick={() => setActiveMenu('email')} className={`text-3xl hover:cursor-pointer hover:text-base-zinc ${activeMenu === 'email' ? 'text-base-zinc' : 'text-white'}`}>Редактор E-mail</li>
             </ul>

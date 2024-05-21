@@ -13,7 +13,9 @@ function Editor() {
     useEffect(() => {
         axios.get('https://skalliance.pro/getDataCard').then(res => setDataCard(JSON.parse(res.data)))
     }, [])
-
+    useEffect(() => {
+        axios.get('https://skalliance.pro/getDataCard').then(res => setDataCard(JSON.parse(res.data)))
+    }, [editModal])
     const deleteCard = async (id: string) => {
         const res = await axios.post('https://skalliance.pro/deleteCard', {id: id})
         if (res.status === 200) {
