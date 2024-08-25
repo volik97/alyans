@@ -27,7 +27,7 @@ export default function Form({ closeForm, subject }: { closeForm?: (a: boolean) 
     }, [dataForm]);
 
     const currentUrl = () => {
-        const urls = ['https://www.skalliance.pro/', 'https://www.skalliance.pro/#/', 'https://skalliance.pro/', 'https://skalliance.pro/#/'];
+        const urls = ['https://www.xn--80aimkbegibhlk6a3ixb.xn--p1ai/', ' https://www.xn--80aimkbegibhlk6a3ixb.xn--p1ai/#/', ' https://xn--80aimkbegibhlk6a3ixb.xn--p1ai/', ' https://xn--80aimkbegibhlk6a3ixb.xn--p1ai/#/'];
         return urls.includes(window.location.href);
     }
 
@@ -57,14 +57,14 @@ export default function Form({ closeForm, subject }: { closeForm?: (a: boolean) 
         setErrorMessage(null);
 
         const captcha = await recaptchaRef.current?.executeAsync();
-        const res = await fetch("https://skalliance.pro/captcha", {
+        const res = await fetch("https://xn--80aimkbegibhlk6a3ixb.xn--p1ai/captcha", {
             method: "POST",
             body: JSON.stringify({ captcha }),
             headers: { "Content-type": "application/json" },
         });
         const { success } = await res.json();
         if (success) {
-            const res = await fetch("https://skalliance.pro/sendEmail", {
+            const res = await fetch(" https://xn--80aimkbegibhlk6a3ixb.xn--p1ai/sendEmail", {
                 method: "POST",
                 body: JSON.stringify(dataForm),
                 headers: { "Content-type": "application/json" },
@@ -102,8 +102,8 @@ export default function Form({ closeForm, subject }: { closeForm?: (a: boolean) 
                     <p className={'text-[#8F9DB2]/70 font-regular text-base md:text-2xl leading-tight tracking-[2%]'}>Заполните данные, и мы Вам презвоним в ближайшее время.</p>
                 </div>
                 <figure className={'w-full h-px bg-[#D9D9D9]'} />
-                <div className={'w-full grid grid-rows-4 grid-cols-1 md:grid-rows-2 md:grid-cols-2 md:gap-x-10 md:gap-y-3'}>
-                    <div className={'flex flex-col col-span-2'}>
+                <div className={'flex flex-col w-full md:gap-x-10 md:gap-y-3'}>
+                    <div className={'flex flex-col w-full'}>
                         <label htmlFor={'firstName'} className={'text-base tracking-wider font-medium text-[#2F2E33] px-1 pt-2 pb-1'}>Как к Вам обращаться</label>
                         <input
                             onChange={handleOnChange}
@@ -125,32 +125,34 @@ export default function Form({ closeForm, subject }: { closeForm?: (a: boolean) 
                     {/*        id={'lastName'}*/}
                     {/*    />*/}
                     {/*</div>*/}
-                    <div className={'flex flex-col'}>
-                        <label htmlFor={'tel'} className={'text-base tracking-wider font-medium text-[#2F2E33] px-1 pt-2 pb-1'}>Номер Телефона</label>
-                        <PatternFormat
-                            type="tel"
-                            format="+7 (###) ###-##-##"
-                            mask="_"
-                            required={false}
-                            id={'tel'}
-                            placeholder={'+7 (999) 999-99-99'}
-                            onChange={handleOnChange}
-                            className={'px-4 w-full py-3 md:p-4 border border-[#717990] focus:bg-[#DFE6F6] hover:bg-[#DFE6F6] outline-none focus:border-base-zinc hover:border-base-zinc text-base tracking-wide'}
-                            value={dataForm.tel}
-                        />
-                    </div>
-                    <div className={'flex flex-col'}>
-                        <label htmlFor={'email'} className={'text-base tracking-wider font-medium text-[#2F2E33] px-1 pt-2 pb-1'}>E-mail</label>
-                        <input
-                            type={'email'}
-                            pattern={'^([^ ]+@[^ ]+\\.[a-z]{2,6}|)$'}
-                            onChange={handleOnChange}
-                            required={false}
-                            placeholder={'email@example.ru'}
-                            className={'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-600 invalid:[&:not(:placeholder-shown):not(:focus)]:bg-red-600/10 px-4 w-full py-3 md:p-4 border border-[#717990] focus:bg-[#DFE6F6] hover:bg-[#DFE6F6] outline-none focus:border-base-zinc hover:border-base-zinc text-base tracking-wide'}
-                            id={'email'}
-                            value={dataForm.email}
-                        />
+                    <div  className={'flex flex-col md:flex-row gap-x-3'}>
+                        <div className={'flex flex-col w-full'}>
+                            <label htmlFor={'tel'} className={'text-base tracking-wider font-medium text-[#2F2E33] px-1 pt-2 pb-1'}>Номер Телефона</label>
+                            <PatternFormat
+                                type="tel"
+                                format="+7 (###) ###-##-##"
+                                mask="_"
+                                required={false}
+                                id={'tel'}
+                                placeholder={'+7 (999) 999-99-99'}
+                                onChange={handleOnChange}
+                                className={'px-4 w-full py-3 md:p-4 border border-[#717990] focus:bg-[#DFE6F6] hover:bg-[#DFE6F6] outline-none focus:border-base-zinc hover:border-base-zinc text-base tracking-wide'}
+                                value={dataForm.tel}
+                            />
+                        </div>
+                        <div className={'flex flex-col w-full'}>
+                            <label htmlFor={'email'} className={'text-base tracking-wider font-medium text-[#2F2E33] px-1 pt-2 pb-1'}>E-mail</label>
+                            <input
+                                type={'email'}
+                                pattern={'^([^ ]+@[^ ]+\\.[a-z]{2,6}|)$'}
+                                onChange={handleOnChange}
+                                required={false}
+                                placeholder={'email@example.ru'}
+                                className={'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-600 invalid:[&:not(:placeholder-shown):not(:focus)]:bg-red-600/10 px-4 w-full py-3 md:p-4 border border-[#717990] focus:bg-[#DFE6F6] hover:bg-[#DFE6F6] outline-none focus:border-base-zinc hover:border-base-zinc text-base tracking-wide'}
+                                id={'email'}
+                                value={dataForm.email}
+                            />
+                        </div>
                     </div>
                 </div>
                 {currentUrl() &&

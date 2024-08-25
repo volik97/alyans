@@ -3,12 +3,13 @@ import axios from "axios";
 
 function Email() {
     const [email, setEmail] = useState()
+    const url = window.location.host
     const [form, setForm] = useState({
         email: '',
         password: '',
     })
     useEffect(() => {
-        axios.get('https://skalliance.pro/getEmail').then((response) => {setEmail(response.data)})
+        axios.get(`https://${url}/getEmail`).then((response) => {setEmail(response.data)})
     }, [])
     const handleOnChange = (
         event:
@@ -21,10 +22,10 @@ function Email() {
     }
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const res = await axios.post('https://skalliance.pro/changeEmail', form);
+        const res = await axios.post(`https://${url}/changeEmail`, form);
         if (res.status === 200) {
             alert('Email changed!')
-            axios.get('https://skalliance.pro/getEmail').then((response) => {setEmail(response.data)})
+            axios.get(`https://${url}/getEmail`).then((response) => {setEmail(response.data)})
         }
     }
     return (

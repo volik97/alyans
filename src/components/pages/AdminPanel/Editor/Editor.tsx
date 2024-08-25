@@ -10,23 +10,24 @@ function Editor() {
     const [deleteId, setDeleteId] = useState<string>('')
     const [visibleModal, setVisibleModal] = useState<boolean>(false)
     const [editModal, setEditModal] = useState<{open: boolean, id: string}|null>(null)
+    const url = window.location.host
     useEffect(() => {
-        axios.get('https://skalliance.pro/getDataCard').then(res => setDataCard(JSON.parse(res.data)))
+        axios.get(`https://${url}/getDataCard`).then(res => setDataCard(JSON.parse(res.data)))
     }, [])
     useEffect(() => {
-        axios.get('https://skalliance.pro/getDataCard').then(res => setDataCard(JSON.parse(res.data)))
+        axios.get(`https://${url}/getDataCard`).then(res => setDataCard(JSON.parse(res.data)))
     }, [editModal])
     const deleteCard = async (id: string) => {
-        const res = await axios.post('https://skalliance.pro/deleteCard', {id: id})
+        const res = await axios.post(`https://${url}/deleteCard`, {id: id})
         if (res.status === 200) {
-            axios.get('https://skalliance.pro/getDataCard').then(res => setDataCard(JSON.parse(res.data)))
+            axios.get(`https://${url}/getDataCard`).then(res => setDataCard(JSON.parse(res.data)))
         }
     }
 
     const visibleCard = async (id: string) => {
-        const res = await axios.post('https://skalliance.pro/visibleCard', {id: id})
+        const res = await axios.post(`https://${url}/visibleCard`, {id: id})
         if (res.status === 200) {
-            axios.get('https://skalliance.pro/getDataCard').then(res => setDataCard(JSON.parse(res.data)))
+            axios.get(`https://${url}/getDataCard`).then(res => setDataCard(JSON.parse(res.data)))
         }
     }
     const findItem = (id: string): IItem|undefined => {

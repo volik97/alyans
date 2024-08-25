@@ -127,13 +127,14 @@ function AddCard({item, closeModal}: {item?: IItem, closeModal?: (a: null) => vo
             setData((prevState) => { return {...prevState, catalogUrls: urlsImages} })
         }
     },[urlsImages])
+    const url = window.location.host
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         const formData = new FormData();
         const formDataImg = prepareImgToSendOnServer(imgFiles, formData)
         formDataImg.append('body', JSON.stringify(data));
         setLoading(true)
-        const res = await axios.post(`https://skalliance.pro/${item ? 'edit':'save'}Card`, formData)
+        const res = await axios.post(`https://${url}/${item ? 'edit':'save'}Card`, formData)
         if (res.status === 200){
             closeModal && closeModal(null)
             setLoading(false)

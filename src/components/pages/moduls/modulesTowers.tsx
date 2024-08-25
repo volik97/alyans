@@ -3,7 +3,7 @@ import {sortByDateCard} from "../../../utils/sortByDate.ts";
 import CategoryButton from "../../ui/categoryButton.tsx";
 import CardModule from "../../ui/cardModule.tsx";
 import {v4 as uuidv4} from "uuid";
-import { useAppSelector} from "../../hooks/redux.ts";
+import {useAppSelector} from "../../hooks/redux.ts";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
@@ -11,9 +11,10 @@ import axios from "axios";
 const categoryNames = ["Все","Спорт", "Здоровье", "Образование", "Культура", "Новые территории"]
 export default function ModulesTowers() {
   const [dataCard, setDataCard] = useState<{id: string, visible:boolean, category: string[], title: string, img: string, catalog: string[], description: string, date: string, floors: string, square: string, deadlines: string, location: string}[]>([])
+  const url = window.location.host
 
   useEffect(() => {
-    axios.get('https://skalliance.pro/getDataCard').then(res => setDataCard(JSON.parse(res.data)))
+    axios.get(`https://${url}/getDataCard`).then(res => setDataCard(JSON.parse(res.data)))
   }, [])
 
   const {category} = useAppSelector(state => state.categoryReducer);
