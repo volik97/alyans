@@ -11,6 +11,7 @@ function Editor() {
     const [visibleModal, setVisibleModal] = useState<boolean>(false)
     const [editModal, setEditModal] = useState<{open: boolean, id: string}|null>(null)
     const url = window.location.host
+    console.log(url)
     useEffect(() => {
         axios.get(`https://${url}/getDataCard`).then(res => setDataCard(JSON.parse(res.data)))
     }, [])

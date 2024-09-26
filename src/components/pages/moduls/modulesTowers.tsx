@@ -16,11 +16,10 @@ export default function ModulesTowers() {
   useEffect(() => {
     axios.get(`https://${url}/getDataCard`).then(res => setDataCard(JSON.parse(res.data)))
   }, [])
-
   const {category} = useAppSelector(state => state.categoryReducer);
   return (
     <div id='modules' className="relative h-fit pt-20 lg:pt-32 xl:pt-20 ultraXl:pt-32">
-      <div className="flex flex-col items-center first:items-start xl:first:items-center">
+      <div className="flex flex-col items-center first:items-center">
         <h1 className="text-[32px] lg:text-6xl xl:text-8xl xl:pt-5 font-thin text-base-gray px-2">Каталог</h1>
         <div className="w-full pt-5 pb-7 max-w-[1642px] h-fit flex flex-col justify-center gap-y-4">
           <h3 className="text-center text-base-gray font-regular text-2xl w-fit px-2 2xl:px-0">Категории</h3>
@@ -31,7 +30,7 @@ export default function ModulesTowers() {
             {categoryNames.map(item => <CategoryButton key={uuidv4()} category={category} id={item}>{item}</CategoryButton>)}
           </div>
         </div>
-        <div className="max-w-[1726px] flex flex-wrap justify-center gap-x-11 gap-y-8 px-2 py-4">
+        <div className="max-w-[1726px] items-center grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 justify-center gap-x-11 gap-y-8 px-2 py-4">
           {category === "Все" ?
               sortByDateCard(dataCard).map((item) => item.visible ? <CardModule key={uuidv4()} item={item}/> : null)
               : sortByDateCard(dataCard).filter((item: { category: string[]; }) => {

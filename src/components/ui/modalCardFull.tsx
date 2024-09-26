@@ -67,15 +67,6 @@ function  ModalCardFull({
                             :
                             <img alt={''} src={item.img} className={'w-full h-[35vh] object-cover'}/>}
                         </Carousel>
-                        {/*<Swiper  pagination={true} modules={[Pagination]} className="w-full md:hidden">*/}
-
-                        {/*    {item.catalog ?*/}
-
-                        {/*        item.catalog.map((item, index) => <SwiperSlide zoom={true} key={index}><img alt={''} onClick={() => setIsOpenFullImage(item)} src={item} className={'w-full h-96 object-cover'}/></SwiperSlide>)*/}
-                        {/*        :*/}
-                        {/*        <SwiperSlide zoom={true}><img alt={''} src={item.img} className={'w-full h-[35vh] object-cover'}/></SwiperSlide>}*/}
-
-                        {/*</Swiper>*/}
                         <div className={'hidden h-fit relative md:flex flex-col px-5 py-10 w-1/2'}>
                             <Swiper
                                 thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null}}

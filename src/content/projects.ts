@@ -29,8 +29,8 @@ const projects = [
   },
   {
     index: 4,
-    title: "Дом Культуры",
-    image: "url('/Images/modulTowers/Culture/26_12_2022/26.12.2022_Culture(2).png')",
+    title: "Дом культуры",
+    image: "url('/Images/modulTowers/Culture/26_12_2022/1.webp')",
     smallDescription:
       'Приобретение и установка модульного Дома Культуры расположенного по адресу: Ростовская область, Верхнедонской район, х.Песковатская Лопатина, ул. Песковатско-Лопатинская, 184',
   },
