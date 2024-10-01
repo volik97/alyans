@@ -22,11 +22,11 @@ export default function ModulesTowers() {
       <div className="flex flex-col items-center first:items-center">
         <h1 className="text-[32px] lg:text-6xl xl:text-8xl xl:pt-5 font-thin text-base-gray px-2">Каталог</h1>
         <div className="w-full pt-5 pb-7 max-w-[1642px] h-fit flex flex-col justify-center gap-y-4">
-          <h3 className="text-center text-base-gray font-regular text-2xl w-fit px-2 2xl:px-0">Категории</h3>
-          <div className={'w-full px-2 2xl:px-0'}>
+          <h3 className="text-center text-base-gray font-regular text-2xl w-fit px-2 pm2 ">Категории</h3>
+          <div className={'w-full px-2'}>
             <figure className={'h-[1px] bg-base-gray'}></figure>
           </div>
-          <div className={'flex gap-3 overflow-y-auto pl-2 2xl:pl-0'}>
+          <div className={'flex gap-3 overflow-y-auto pl-2'}>
             {categoryNames.map(item => <CategoryButton key={uuidv4()} category={category} id={item}>{item}</CategoryButton>)}
           </div>
         </div>
