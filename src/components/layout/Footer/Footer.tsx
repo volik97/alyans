@@ -31,7 +31,7 @@ export default function Footer() {
           href="#"
           className="font-thin text-xl ultraXl:text-3xl text-base-gray"
         >
-          © ООО «Альянс», 2024
+          © ООО «Альянс», {new Date().getFullYear()}
         </a>
         <a
           href="#"
