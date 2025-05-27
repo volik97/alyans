@@ -28,13 +28,13 @@ export default function Footer() {
       <hr className="my-6 w-2/4 border-base-gray opacity-20 " />
       <div className="flex flex-col items-center md:flex-row gap-2 md:gap-10">
         <a
-          href="#"
           className="font-thin text-xl ultraXl:text-3xl text-base-gray"
         >
           © ООО «Альянс», {new Date().getFullYear()}
         </a>
         <a
-          href="#"
+          target="_blank"
+          href="/privacy.pdf"
           className="font-thin text-xl text-center ultraXl:text-3xl text-base-gray"
         >
           Политика конфиденциальности
