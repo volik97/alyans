@@ -46,12 +46,12 @@ function AddCard({item, closeModal}: {item?: IItem, closeModal?: (a: null) => vo
             case 'Образование':
                 return { id: 'education', name: 'Образование' }
                 break;
-            case 'Здоровье':
-                return { id: 'health', name: 'Здоровье' }
+            case 'Здравоохранение':
+                return { id: 'health', name: 'Здравоохранение' }
                 break;
-            case 'Новые территории':
-                return { id: 'newTerritory', name: 'Новые территории' }
-                break;
+            // case 'Новые территории':
+            //     return { id: 'newTerritory', name: 'Новые территории' }
+            //     break;
             case 'Крым':
                 return { id: 'Krym', name: 'Крым' }
                 break;
@@ -147,8 +147,8 @@ function AddCard({item, closeModal}: {item?: IItem, closeModal?: (a: null) => vo
         { id: 'sport', name: 'Спорт' },
         { id: 'culture', name: 'Культура' },
         { id: 'education', name: 'Образование' },
-        { id: 'health', name: 'Здоровье' },
-        { id: 'newTerritory', name: 'Новые территории' },
+        { id: 'health', name: 'Здравоохранение' },
+        // { id: 'newTerritory', name: 'Новые территории' },
         { id: 'Krym', name: 'Крым' },
     ];
     const handleSelectChange = (selected: { id: string; name: string}[]) => {

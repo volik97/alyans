@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 
 
-const categoryNames = ["Все","Спорт", "Здоровье", "Образование", "Культура", "Новые территории"]
+const categoryNames = ["Все", "Здравоохранение", "Спорт", "Образование", "Культура"]
 export default function ModulesTowers() {
   const [dataCard, setDataCard] = useState<{id: string, visible:boolean, category: string[], title: string, img: string, catalog: string[], description: string, date: string, floors: string, square: string, deadlines: string, location: string}[]>([])
   const url = window.location.host

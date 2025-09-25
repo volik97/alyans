@@ -88,7 +88,7 @@ function Header() {
                                 Каталог
                             </p>
                     </NavLink>
-                    <NavLink to="/newTerritory">
+                    {/* <NavLink to="/newTerritory">
                         <p
                             onClick={() => {
                                 handlerCloseNav();
@@ -100,7 +100,7 @@ function Header() {
                         >
                             Новые территории
                         </p>
-                    </NavLink>
+                    </NavLink> */}
                 </div>
             </div>
         </div>
@@ -131,7 +131,7 @@ function Header() {
     return (
         <Navbar placeholder={''} onMouseLeave={() => handlerCloseNav()} className="fixed top-0 z-20 border-none rounded-none max-w-full bg-[rgba(47,46,51,0.90)] py-3 px-5 lg:py-[15px] lg:px-[42px ]">
             <div className="h-full flex items-center justify-between">
-                <div className='w-full flex justify-between lg:justify-start lg:gap-10 items-center'>
+                <div className='w-full flex justify-between lg:justify-start lg:gap-10 items-center py-[7px]'>
                     <IconButton
                         placeholder={''}
                         variant="text"
@@ -166,7 +166,7 @@ function Header() {
                     </IconButton>
                     <Logo className={"hidden lg:block order-1 lg:order-none "}/>
                 </div>
-                    <NavLink key={uuidv4()} to="/newTerritory">
+                    {/* <NavLink key={uuidv4()} to="/newTerritory">
                         <p
 
                             onClick={() => {
@@ -180,7 +180,7 @@ function Header() {
                             hover:text-[#3A5199]"                        >
                             Новые территории
                         </p>
-                    </NavLink>
+                    </NavLink> */}
             </div>
             <Collapse  open={openNav} className="">
                 <div className={'relative sm:px-10 pt-12 pb-4 flex sm:flex-row flex-col justify-start items-start gap-x-20 gap-y-10'}>

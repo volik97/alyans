@@ -166,7 +166,14 @@ export default function Form({ closeForm, subject }: { closeForm?: (a: boolean) 
                     </div>}
                 {errorMessage && <p className="text-red-600">{errorMessage}</p>}
                 <p className={'text-[#8F9DB2]/70 font-normal text-base md:text-2xl leading-tight tracking-[2%]'}>
-                    Оставляя заявку вы соглашаетесь с Пользовательским соглашением.
+                    Оставляя заявку вы соглашаетесь с{' '}
+                    <a
+                        target="_blank"
+                        href="/privacy.pdf"
+                        className="text-[#8F9DB2]/70 hover:text-[#8F9DB2] underline"
+                    >
+                        Политикой конфиденциальности сайта
+                    </a>.
                 </p>
                 <div className={'w-full'}>
                     <button
