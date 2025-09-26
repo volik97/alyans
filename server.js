@@ -17,8 +17,8 @@ const {prepareDate, prepareCategory, prepareJSON} = require("./utils/prepareData
 // если на хосте тут будет выебываться и не получится прочитать сертификаты проверь их доступ в ситеме (chmod)
 let httpsOptions = {};
 try {
-	const key = fs.readFileSync(path.join(__dirname, './cert/private.key'));
-	const cert = fs.readFileSync(path.join(__dirname, './cert/certificate.crt'));
+	const key = fs.readFileSync('/etc/letsencrypt/live/xn--80aimkbegibhlk6a3ixb.xn--p1ai/privkey.pem');
+	const cert = fs.readFileSync('/etc/letsencrypt/live/xn--80aimkbegibhlk6a3ixb.xn--p1ai/fullchain.pem');
 
 	httpsOptions = {
 		key,

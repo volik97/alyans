@@ -8,6 +8,7 @@ import Header from "../header/Header.tsx";
 import News from "../../pages/News/news.tsx";
 import CurrentEvents from "../../pages/News/currentEvents/currentEvents.tsx";
 import AdminPanel from "../../pages/AdminPanel/AdminPanel.tsx";
+import ContactsPage from "../../pages/contacts/Contacts.tsx";
 
 export default function PageWrapper({className}: {className?: string}) {
   return (
@@ -21,6 +22,7 @@ export default function PageWrapper({className}: {className?: string}) {
               <Route index element={<News/>}/>
               <Route path=':id' element={<CurrentEvents/>} />
           </Route>
+          <Route path="/contacts" element={<ContactsPage/>}/>
           <Route path="/rFtoqf2Ukl9vNhFe0UvsfYLqqdSKtvHA" element={<AdminPanel/>}/>
       </Routes>
       <Footer />

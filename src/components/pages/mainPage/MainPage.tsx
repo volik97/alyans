@@ -9,7 +9,9 @@ import FromMainPage from "../../blocks/form/fromMainPage.tsx";
 export default function MainPage() {
   return (
     <>
-      <Hero />
+      <Hero   title = "МОДУЛЬНЫЕ"
+              subtitle = "БЫСТРОВОЗВОДИМЫЕ"
+              description = "ЗДАНИЯ" />
       <UsProjects />
       <Advantages />
         <Faq/>

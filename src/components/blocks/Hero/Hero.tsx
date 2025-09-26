@@ -1,5 +1,15 @@
 
-export default function Hero() {
+interface HeroProps {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+}
+
+export default function Hero({ 
+  title, 
+  subtitle, 
+  description 
+}: HeroProps) {
   return (
       <div id={'hero'} className={'relative h-fit md:h-screen flex justify-center items-center overflow-clip'}>
           <img className={'w-screen h-screen object-cover'} src={'https://альянспромодули.рф/images/banner.jpg'}/>
@@ -11,18 +21,18 @@ export default function Hero() {
                            <h1
                                className="font-ultraBold tracking-wide text-base-gray text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[116px] ultraXl:text-[12rem]"
                           >
-                            МОДУЛЬНЫЕ
+                            {title}
                           </h1>
-                          <h1
+                          {subtitle && <h1
                               className="font-ultraBold tracking-tight text-base-gray text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[116px] ultraXl:text-[12rem]"
                           >
-                            БЫСТРОВОЗВОДИМЫЕ
-                          </h1>
-                          <h1
+                            {subtitle}
+                          </h1>}
+                          {description && <h1
                               className="font-ultraBold tracking-wide text-base-gray text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[116px] ultraXl:text-[12rem]"
                           >
-                            ЗДАНИЯ
-                          </h1>
+                            {description}
+                          </h1>}
                         </div>
         </div>
       </div>
