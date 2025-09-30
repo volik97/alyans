@@ -4,7 +4,7 @@ import Hero from "../../blocks/Hero/Hero";
 import UsProjects from "../../blocks/UsProjects/UsProjects";
 import Faq from "../../blocks/faq/faq.tsx";
 import Advantages from "../../blocks/Advantages/Advantages.tsx";
-import FromMainPage from "../../blocks/form/fromMainPage.tsx";
+import FormCallback from "../../blocks/form/FormCallback.tsx";
 
 export default function MainPage() {
   return (
@@ -15,7 +15,7 @@ export default function MainPage() {
       <UsProjects />
       <Advantages />
         <Faq/>
-        <FromMainPage/>
+        <FormCallback/>
         <div id="contacts"/>
       <YMaps query={{ apikey: "3393c833-d9af-455e-aeac-c97893c9816d" }}>
         <Contacts />

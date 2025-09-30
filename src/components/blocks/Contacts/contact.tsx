@@ -86,7 +86,8 @@ export default function Contact() {
             <a
                 className="font-thin text-lg md:text-xl ultraXl:text-4xl text-base-gray"
             >
-              Пн-пт: 09:00 – 18:00
+                                Пн-пт: 09:00 – 18:00<br />
+                                Сб-вс: выходной
             </a>
           </div>
         </div>

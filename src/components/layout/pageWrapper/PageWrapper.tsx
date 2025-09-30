@@ -9,10 +9,12 @@ import News from "../../pages/News/news.tsx";
 import CurrentEvents from "../../pages/News/currentEvents/currentEvents.tsx";
 import AdminPanel from "../../pages/AdminPanel/AdminPanel.tsx";
 import ContactsPage from "../../pages/contacts/Contacts.tsx";
+import ScrollToTop from "../ScrollToTop.tsx";
 
 export default function PageWrapper({className}: {className?: string}) {
   return (
     <div className={`${className} min-h-screen`} >
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />

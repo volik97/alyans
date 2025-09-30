@@ -64,7 +64,7 @@ export default function Advantages() {
                     <div className={'h-[390px] p-6 flex flex-col justify-end gap-2.5  bg-gradient-to-t from-gray-900'}>
                         <h3 className="font-semibold text-2xl text-base-gray">Шеф-монтаж</h3>
                         <p className="font-thin text-lg text-white tracking-wider">
-                            Мы предоставим укомплектованную бригаду опытных специалистов для осуществления монтажа инженерных сетей и дальнейшей пуско-наладочой работы.                        </p>
+                            Мы предоставим укомплектованную бригаду опытных специалистов для осуществления монтажа инженерных сетей и дальнейшей пусконаладочной работы.                        </p>
                     </div>
                 </div>
                 <div className="bg-cover bg-center w-full md:col-span-2 md:col-start-1 md:row-start-3" style={{backgroundImage: 'url("/Images/advantageImg/alarmSystems.webp")'}}>

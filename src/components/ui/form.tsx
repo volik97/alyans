@@ -98,8 +98,8 @@ export default function Form({ closeForm, subject }: { closeForm?: (a: boolean) 
                     />
                 </svg>}
                 <div className={'space-y-2'}>
-                    <h3 className={'font-medium text-2xl md:text-4xl text-[#2F2E33]'}>Задать вопрос по направлению «Модули»</h3>
-                    <p className={'text-[#8F9DB2]/70 font-regular text-base md:text-2xl leading-tight tracking-[2%]'}>Заполните данные, и мы Вам презвоним в ближайшее время.</p>
+                    <h3 className={'font-medium text-2xl md:text-4xl text-[#2F2E33]'}>Остались вопросы?</h3>
+                    <p className={'text-[#8F9DB2]/70 font-regular text-base md:text-2xl leading-tight tracking-[2%]'}>Заполните форму обратной связи и c Вами свяжется специалист нашей компании.</p>
                 </div>
                 <figure className={'w-full h-px bg-[#D9D9D9]'} />
                 <div className={'flex flex-col w-full md:gap-x-10 md:gap-y-3'}>
@@ -114,17 +114,6 @@ export default function Form({ closeForm, subject }: { closeForm?: (a: boolean) 
                             id={'firstName'}
                         />
                     </div>
-                    {/*<div className={'flex flex-col col-span-2'}>*/}
-                    {/*    <label htmlFor={'lastName'} className={'text-base tracking-wider font-medium text-[#2F2E33] px-1 pt-2 pb-1'}>Фамилия</label>*/}
-                    {/*    <input*/}
-                    {/*        onChange={handleOnChange}*/}
-                    {/*        pattern={"[а-яА-ЯёЁ]+"}*/}
-                    {/*        required*/}
-                    {/*        placeholder={''}*/}
-                    {/*        className={'invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-600 invalid:[&:not(:placeholder-shown):not(:focus)]:bg-red-600/10 px-4 w-full py-3 md:p-4 border border-[#717990] focus:bg-[#DFE6F6] hover:bg-[#DFE6F6] outline-none focus:border-base-zinc hover:border-base-zinc text-base tracking-wide'}*/}
-                    {/*        id={'lastName'}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
                     <div  className={'flex flex-col md:flex-row gap-x-3'}>
                         <div className={'flex flex-col w-full'}>
                             <label htmlFor={'tel'} className={'text-base tracking-wider font-medium text-[#2F2E33] px-1 pt-2 pb-1'}>Номер Телефона</label>
