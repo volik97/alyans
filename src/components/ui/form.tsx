@@ -80,7 +80,7 @@ export default function Form({ closeForm, subject }: { closeForm?: (a: boolean) 
             <form
                 onSubmit={handleSubmit}
                 onClick={e => e.stopPropagation()}
-                className={`relative group min-w-[280px] ${currentUrl() ? 'max-w-[620px] border border-black' : 'max-w-[840px] border border-black'} gap-3 md:gap-6 flex flex-col justify-start items-start w-full h-fit px-2 pt-5 pb-4 md:px-[60px] md:pb-[60px] md:pt-10 bg-white`}
+                className={`relative group min-w-[280px] ${currentUrl() ? 'max-w-[620px] border border-black' : 'max-w-[840px] border border-black'} gap-3 md:gap-6 flex flex-col justify-start items-start w-full h-fit px-4 pt-5 pb-4 md:px-[60px] md:pb-[60px] md:pt-10 bg-white`}
             >
                 {closeForm && <svg
                     xmlns="http://www.w3.org/2000/svg"
