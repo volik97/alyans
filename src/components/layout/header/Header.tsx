@@ -17,6 +17,9 @@ function Header() {
                         <NavLink to="/">
                             <p className={'font-thin text-base-gray text-xl lg:text-2xl hover:scale-105 transition duration-200'}>Главная</p>
                         </NavLink>
+                        <NavLink to={'/about'}>
+                            <p className={'font-thin text-base-gray text-xl lg:text-2xl hover:scale-105 transition duration-200'}>О компании</p>
+                        </NavLink>
                         <NavLink to={'/moduls'}>
                             <p className={'font-thin text-base-gray text-xl lg:text-2xl hover:scale-105 transition duration-200'}>Портфолио</p>
                         </NavLink>
