@@ -1,10 +1,11 @@
-import PageWrapper from "../layout/pageWrapper/PageWrapper";
+import PageWrapper from '../layout/pageWrapper/PageWrapper';
 
 function App() {
-
-  return (<>
-    <PageWrapper />
-  </>);
+    return (
+        <>
+            <PageWrapper />
+        </>
+    );
 }
 
 export default App;
