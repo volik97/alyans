@@ -10,6 +10,7 @@ import CurrentEvents from '../../pages/News/currentEvents/currentEvents.tsx';
 import AdminPanel from '../../pages/AdminPanel/AdminPanel.tsx';
 import ContactsPage from '../../pages/contacts/Contacts.tsx';
 import About from '../../pages/about/About.tsx';
+import Projects from '../../pages/projects/Projects.tsx';
 import ScrollToTop from '../ScrollToTop.tsx';
 
 export default function PageWrapper({ className }: { className?: string }) {
@@ -21,6 +22,7 @@ export default function PageWrapper({ className }: { className?: string }) {
                 <Route path='/' element={<MainPage />} />
                 <Route path='/about' element={<About />} />
                 <Route path='/moduls' element={<ModulesTowers />} />
+                <Route path='/projects' element={<Projects />} />
                 {/* <Route path="/newTerritory" element={<NewTerritory/>} /> */}
                 <Route path='/news'>
                     <Route index element={<News />} />

@@ -3,9 +3,9 @@ import axios from 'axios';
 import { sortByDateCard } from '../../../../utils/sortByDate.ts';
 import CardModule from '../../../ui/cardModule.tsx';
 import { v4 as uuidv4 } from 'uuid';
-import AddCard, { IItem } from '../AddCard/AddCard.tsx';
+import AddProject, { IItem } from '../AddProject/AddProject.tsx';
 
-function Editor() {
+function EditProject() {
     const [dataCard, setDataCard] = useState<
         {
             id: string;
@@ -27,46 +27,40 @@ function Editor() {
     const [editModal, setEditModal] = useState<{ open: boolean; id: string } | null>(null);
     const url = window.location.host;
     useEffect(() => {
-        axios.get(`https://${url}/getDataCard`).then(res => {
+        axios.get(`https://${url}/getDataProjects`).then(res => {
             const data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
             setDataCard(data);
         });
     }, []);
     useEffect(() => {
-        axios.get(`https://${url}/getDataCard`).then(res => {
+        axios.get(`https://${url}/getDataProjects`).then(res => {
             const data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
             setDataCard(data);
         });
     }, [editModal]);
     const deleteCard = async (id: string) => {
-        const res = await axios.post(`https://${url}/deleteCard`, { id: id });
+        const res = await axios.post(`https://${url}/deleteProject`, { id: id });
         if (res.status === 200) {
-            setTimeout(() => {
-                axios
-                    .get(`https://${url}/getDataCard`)
-                    .then(res => {
-                        const data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
-                        setDataCard(data);
-                    })
-                    .catch(err => {
-                        console.error('Error fetching cards after deletion:', err);
-                    });
-            }, 1000);
+            axios.get(`https://${url}/getDataProjects`).then(res => {
+                const data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
+                setDataCard(data);
+            });
         }
     };
 
     const visibleCard = async (id: string) => {
-        const res = await axios.post(`https://${url}/visibleCard`, { id: id });
+        const res = await axios.post(`https://${url}/visibleProject`, { id: id });
         if (res.status === 200) {
+            // Добавляем небольшую задержку перед обновлением данных
             setTimeout(() => {
                 axios
-                    .get(`https://${url}/getDataCard`)
+                    .get(`https://${url}/getDataProjects`)
                     .then(res => {
                         const data = typeof res.data === 'string' ? JSON.parse(res.data) : res.data;
                         setDataCard(data);
                     })
                     .catch(err => {
-                        console.error('Error fetching cards after visibility change:', err);
+                        console.error('Error fetching projects after visibility change:', err);
                     });
             }, 1000);
         }
@@ -121,7 +115,7 @@ function Editor() {
                 >
                     <div className={'bg-gray-700 p-10 space-y-10'}>
                         <a className={'text-white text-xl'}>
-                            Вы уверены, что хотите удалить объект? Он пропадет навсегда
+                            Вы уверены, что хотите удалить проект? Он пропадет навсегда
                         </a>
                         <div className={'flex flex-row text-center gap-5'}>
                             <a
@@ -152,7 +146,7 @@ function Editor() {
                     }
                 >
                     <div className={'bg-gray-700 overflow-y-scroll h-screen'}>
-                        <AddCard closeModal={setEditModal} item={findItem(editModal.id)} />
+                        <AddProject closeModal={setEditModal} item={findItem(editModal.id)} />
                     </div>
                 </div>
             )}
@@ -160,4 +154,4 @@ function Editor() {
     );
 }
 
-export default Editor;
+export default EditProject;

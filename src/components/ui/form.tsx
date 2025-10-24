@@ -12,6 +12,7 @@ export default function Form({
     const [successSend, setSuccessSend] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+    const [privacyAgreed, setPrivacyAgreed] = useState(false);
     const [dataForm, setDataForm] = useState({
         subject: subject,
         tel: '',
@@ -26,12 +27,12 @@ export default function Form({
         const isEmailValid =
             dataForm.email === '' || /^[^ ]+@[^ ]+\.[a-z]{2,6}$/i.test(dataForm.email);
 
-        if ((dataForm.tel || dataForm.email) && isTelValid && isEmailValid) {
+        if ((dataForm.tel || dataForm.email) && isTelValid && isEmailValid && privacyAgreed) {
             setIsSubmitDisabled(false);
         } else {
             setIsSubmitDisabled(true);
         }
-    }, [dataForm]);
+    }, [dataForm, privacyAgreed]);
 
     const currentUrl = () => {
         const urls = [
@@ -83,6 +84,8 @@ export default function Form({
             });
             if (res.status === 200) {
                 setSuccessSend(true);
+            } else {
+                setErrorMessage('Ошибка отправки формы. Попробуйте еще раз.');
             }
         }
     };
@@ -136,7 +139,7 @@ export default function Form({
                         </label>
                         <input
                             onChange={handleOnChange}
-                            pattern={'[а-яА-ЯёЁ]+'}
+                            pattern={'[а-яА-ЯёЁ\\s]+'}
                             required
                             placeholder={'Иванов Иван Иванович'}
                             className={
@@ -213,26 +216,34 @@ export default function Form({
                     </div>
                 )}
                 {errorMessage && <p className='text-red-600'>{errorMessage}</p>}
-                <p
-                    className={
-                        'text-[#8F9DB2]/70 font-normal text-base md:text-2xl leading-tight tracking-[2%]'
-                    }
-                >
-                    Оставляя заявку вы соглашаетесь с{' '}
-                    <a
-                        target='_blank'
-                        href='/privacy.pdf'
-                        className='text-[#8F9DB2]/70 hover:text-[#8F9DB2] underline'
+                <div className='flex items-start gap-3'>
+                    <input
+                        type='checkbox'
+                        id='privacy-agreement'
+                        checked={privacyAgreed}
+                        onChange={e => setPrivacyAgreed(e.target.checked)}
+                        className='mt-1 w-6 h-6 bg-gray-100 border-gray-300 rounded accent-[#3a5099] cursor-pointer'
+                    />
+                    <label
+                        htmlFor='privacy-agreement'
+                        className='text-[#8F9DB2]/70 font-normal text-base md:text-2xl leading-tight tracking-[2%] cursor-pointer'
                     >
-                        Политикой конфиденциальности сайта
-                    </a>
-                    .
-                </p>
+                        Оставляя заявку Вы соглашаетесь с{' '}
+                        <a
+                            target='_blank'
+                            href='/privacy.pdf'
+                            className='text-[#8F9DB2]/70 hover:text-[#8F9DB2] underline'
+                        >
+                            Политикой конфиденциальности сайта
+                        </a>
+                        .
+                    </label>
+                </div>
                 <div className={'w-full'}>
                     <button
                         type={'submit'}
                         disabled={isSubmitDisabled}
-                        className={`text-center w-full float-right max-w-[300px] font-medium cursor-pointer tracking-wider rounded-none text-[16px] ultraXl:text-[18px] px-6 py-5 ultraXl:w-72 ultraXl:h-14 ultraXl:tracking-wider bg-[#3A5199] text-[#D5D6D2] flex-col items-center justify-center transition duration-200 hover:bg-[#D5D6D2] hover:text-[#3A5199] ${isSubmitDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        className={`text-center w-full float-right max-w-[300px] font-medium tracking-wider rounded-none text-[16px] ultraXl:text-[18px] px-6 py-5 ultraXl:w-72 ultraXl:h-14 ultraXl:tracking-wider flex-col items-center justify-center transition duration-200 ${isSubmitDisabled ? 'bg-gray-400 text-gray-600 cursor-not-allowed opacity-60' : 'bg-[#3A5199] text-[#D5D6D2] cursor-pointer hover:bg-[#D5D6D2] hover:text-[#3A5199]'}`}
                     >
                         ОТПРАВИТЬ
                     </button>

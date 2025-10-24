@@ -50,6 +50,7 @@ app.use(express.urlencoded({ extended: false }));
 // это означает что из  папки dist будут отдаваться статика по корневому адресу сервера, и кстати если положишь index.html вот так dist/index.html то этот server.js будет отдавать и твой сайт
 app.use('/', express.static(path.join(__dirname, './dist')));
 app.use('/images', express.static(path.join(__dirname, './images')));
+app.use('/images/projects', express.static(path.join(__dirname, './images/projects')));
 
 const verifyEndpoint = 'https://www.google.com/recaptcha/api/siteverify';
 
@@ -100,11 +101,30 @@ app.post('/sendEmail', async (req, res) => {
         await res.status(200).json({ result: 'ok' });
     } catch (err) {
         console.error('Ошибка отправки email:', err);
+        res.status(500).json({ error: 'Ошибка отправки email' });
     }
 });
 app.get('/getDataCard', async (req, res) => {
-    const data = fs.readFileSync(join(__dirname, './data.json'), { encoding: 'utf-8' });
-    res.status(200).json(data);
+    try {
+        console.log('getDataCard called');
+        const data = fs.readFileSync(join(__dirname, './data.json'), { encoding: 'utf-8' });
+        console.log('getDataCard data length:', data.length);
+        res.status(200).json(data);
+    } catch (err) {
+        console.error('Error in getDataCard:', err);
+        res.status(500).send('Error reading data');
+    }
+});
+app.get('/getDataProjects', async (req, res) => {
+    try {
+        console.log('getDataProjects called');
+        const data = fs.readFileSync(join(__dirname, './dataProjects.json'), { encoding: 'utf-8' });
+        console.log('getDataProjects data length:', data.length);
+        res.status(200).json(data);
+    } catch (err) {
+        console.error('Error in getDataProjects:', err);
+        res.status(500).send('Error reading data');
+    }
 });
 app.get('/getEmail', async (req, res) => {
     const data = fs.readFileSync(join(__dirname, './dataEmail.json'), { encoding: 'utf-8' });
@@ -119,13 +139,16 @@ app.post('/saveCard', async (req, res) => {
         const catalog = [];
         const prevDataJson = fs.readFileSync(join(__dirname, './data.json'), { encoding: 'utf-8' });
         const prevDataParse = JSON.parse(prevDataJson);
-        const lastID = prevDataParse.reduce(function (prev, current) {
-            if (+current.id > +prev.id) {
-                return current;
-            } else {
-                return prev;
-            }
-        }).id;
+        const lastID =
+            prevDataParse.length > 0
+                ? prevDataParse.reduce(function (prev, current) {
+                      if (+current.id > +prev.id) {
+                          return current;
+                      } else {
+                          return prev;
+                      }
+                  }).id
+                : 0;
         const confirmId = +lastID + 1;
         fs.mkdirSync(`images/modulTowers/${category}/${date}_${confirmId}/`, { recursive: true });
         for (let item in req.files) {
@@ -168,9 +191,29 @@ app.post('/saveCard', async (req, res) => {
     }
 });
 app.post('/visibleCard', async (req, res) => {
-    const data = req.body;
-    visibleCard(data.id);
-    res.status(200).send('OK');
+    try {
+        console.log('visibleCard called with:', req.body);
+        const data = req.body;
+        const result = visibleCard(data.id, '../data.json');
+        console.log('visibleCard result:', result);
+        res.status(200).send('OK');
+    } catch (err) {
+        console.error('Error in visibleCard:', err);
+        res.status(500).send('Error');
+    }
+});
+
+app.post('/visibleProject', async (req, res) => {
+    try {
+        console.log('visibleProject called with:', req.body);
+        const data = req.body;
+        const result = visibleCard(data.id, '../dataProjects.json');
+        console.log('visibleCard result:', result);
+        res.status(200).send('OK');
+    } catch (err) {
+        console.error('Error in visibleProject:', err);
+        res.status(500).send('Error');
+    }
 });
 app.post('/deleteCard', async (req, res) => {
     const data = req.body;
@@ -292,6 +335,185 @@ app.post('/editCard', async (req, res) => {
         res.status(500).send(err);
     }
 });
+
+// Эндпоинты для проектов
+app.post('/saveProject', async (req, res) => {
+    try {
+        const data = JSON.parse(req.body.body);
+        const date = prepareDate(data.date);
+        const category = prepareCategory(data.category[0]);
+        const catalog = [];
+        const prevDataJson = fs.readFileSync(join(__dirname, './dataProjects.json'), {
+            encoding: 'utf-8',
+        });
+        const prevDataParse = JSON.parse(prevDataJson);
+        const lastID =
+            prevDataParse.length > 0
+                ? prevDataParse.reduce(function (prev, current) {
+                      if (+current.id > +prev.id) {
+                          return current;
+                      } else {
+                          return prev;
+                      }
+                  }).id
+                : 0;
+        const confirmId = +lastID + 1;
+        fs.mkdirSync(`images/projects/${category}/${date}_${confirmId}/`, { recursive: true });
+        for (let item in req.files) {
+            const file = req.files[item];
+            const filePath = path.join(
+                __dirname,
+                'images',
+                'projects',
+                `${category}`,
+                `${date}_${confirmId}`,
+                `${file.name}`
+            );
+            file.mv(filePath, err => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+            });
+            catalog.push(file.name);
+        }
+        const card = prepareJSON(
+            data.location,
+            data.deadlines,
+            data.square,
+            data.floors,
+            data.category,
+            category,
+            data.title,
+            date,
+            catalog,
+            data.description,
+            data.date,
+            confirmId,
+            undefined,
+            '../dataProjects.json'
+        );
+        const statusSave = saveCard(card, '../dataProjects.json');
+        if (statusSave === 'OK') {
+            res.status(200).send('Проект добавлен');
+        }
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+app.post('/deleteProject', async (req, res) => {
+    try {
+        const data = req.body;
+        if (data.id) {
+            deleteCard(data.id, '../dataProjects.json');
+            res.status(200).send('Проект удален');
+        } else {
+            res.status(400).send('ID не указан');
+        }
+    } catch (err) {
+        res.status(500).send('Ошибка удаления проекта!');
+    }
+});
+
+app.post('/editProject', async (req, res) => {
+    try {
+        const data = JSON.parse(req.body.body);
+        const date = prepareDate(data.date);
+        const category = prepareCategory(data.category[0]);
+        const catalogUrls = data.catalogUrls;
+        const catalog = [];
+        const dataJson = fs.readFileSync(join(__dirname, './dataProjects.json'), {
+            encoding: 'utf-8',
+        });
+        const parseData = JSON.parse(dataJson).find(item => item.id === data.id);
+        let oldUrl;
+        let oldPath;
+        if (parseData.catalog[0]) {
+            oldUrl = parseData.catalog[0].split('/').slice(-3);
+            oldPath = path.join(__dirname, 'images', 'projects', `${oldUrl[0]}`, `${oldUrl[1]}`);
+        }
+        const newPath = path.join(
+            __dirname,
+            'images',
+            'projects',
+            `${category}`,
+            `${date}_${data.id}`
+        );
+
+        const deleteData = parseData.catalog.filter(item => !catalogUrls.includes(item));
+
+        //удаляем старые фото
+        if (deleteData.length > 0) {
+            for (let item in deleteData) {
+                const url = deleteData[item];
+                const directory = url.split('/').slice(-3);
+                const filePath = path.join(
+                    __dirname,
+                    'images',
+                    'projects',
+                    `${directory[0]}`,
+                    `${directory[1]}`,
+                    `${directory[2]}`
+                );
+                if (fs.existsSync(filePath)) {
+                    fs.unlinkSync(
+                        `images/projects/${directory[0]}/${directory[1]}/${directory[2]}`
+                    );
+                } else {
+                    fs.unlinkSync(
+                        `images/projects/${directory[0]}/${directory[1]}_${data.id}/${directory[2]}`
+                    );
+                }
+            }
+        }
+        if (oldPath && oldPath !== newPath) {
+            fs.renameSync(oldPath, newPath);
+        } else {
+            fs.mkdirSync(`images/projects/${category}/${date}_${data.id}/`, { recursive: true });
+        }
+
+        for (let item in req.files) {
+            const file = req.files[item];
+            const filePath = path.join(
+                __dirname,
+                'images',
+                'projects',
+                `${category}`,
+                `${date}_${data.id}`,
+                `${file.name}`
+            );
+            file.mv(filePath, err => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+            });
+            catalog.push(file.name);
+        }
+        const card = prepareJSON(
+            data.location,
+            data.deadlines,
+            data.square,
+            data.floors,
+            data.category,
+            category,
+            data.title,
+            date,
+            catalog,
+            data.description,
+            data.date,
+            data.id,
+            catalogUrls,
+            '../dataProjects.json'
+        );
+        const statusSave = editCard(card, '../dataProjects.json');
+        if (statusSave === 'OK') {
+            res.status(200).send('Проект обновлен');
+        }
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
 app.post('/changeEmail', async (req, res) => {
     try {
         const { email, password } = req.body;

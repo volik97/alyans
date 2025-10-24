@@ -10,7 +10,7 @@ import axios from 'axios';
 
 const categoryNames = ['Все', 'Здравоохранение', 'Спорт', 'Образование', 'Культура'];
 
-export default function ModulesTowers() {
+export default function Projects() {
     const [dataCard, setDataCard] = useState<
         {
             id: string;
@@ -29,10 +29,9 @@ export default function ModulesTowers() {
     >([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(6);
-
     const url = window.location.host;
     useEffect(() => {
-        axios.get(`https://${url}/getDataCard`).then(res => setDataCard(JSON.parse(res.data)));
+        axios.get(`https://${url}/getDataProjects`).then(res => setDataCard(JSON.parse(res.data)));
     }, []);
 
     const { category } = useAppSelector(state => state.categoryReducer);
@@ -71,7 +70,7 @@ export default function ModulesTowers() {
     const handlePageChange = (page: number) => {
         setCurrentPage(page);
         // Прокручиваем к началу списка карточек
-        const catalogElement = document.getElementById('modules');
+        const catalogElement = document.getElementById('projects');
         if (catalogElement) {
             catalogElement.scrollIntoView({ behavior: 'smooth' });
         }
@@ -81,12 +80,45 @@ export default function ModulesTowers() {
         setItemsPerPage(newItemsPerPage);
         setCurrentPage(1);
     };
+
     return (
-        <div id='modules' className='relative h-fit pt-20 lg:pt-32 xl:pt-20 ultraXl:pt-32'>
+        <div id='projects' className='relative h-fit pt-20 lg:pt-32 xl:pt-20 ultraXl:pt-32'>
             <div className='flex flex-col items-center first:items-center'>
-                <h1 className='text-[32px] lg:text-6xl xl:text-8xl xl:pt-5 font-thin text-base-gray px-2'>
-                    Портфолио
+                <h1 className='text-[32px] pb-20 lg:text-6xl xl:text-8xl xl:pt-5 font-thin text-base-gray px-2'>
+                    Проекты
                 </h1>
+                <div className='bg-white w-full flex items-center justify-center mb-20'>
+                    <div className='w-full max-w-[1728px] h-full flex flex-col items-start pt-[38px] pb-[57px] px-8 lg:px-[75px] justify-center'>
+                        <h1 className='font-thin text-4xl md:text-6xl lg:text-[94px] text-black pb-4'>
+                            ООО "Альянс"
+                        </h1>
+                        <p className='font-thin  text-xl md:text-3xl text-black'>
+                            <span className='font-bold inline'>
+                                Производственно - строительная компания "Альянс"
+                            </span>{' '}
+                            предлагает полный цикл работ по проектированию быстровозводимых
+                            модульных зданий, в том числе:
+                        </p>
+                        <ul className='font-thin text-xl md:text-3xl text-black list-disc list-inside ml-4 space-y-2 pt-8'>
+                            <li>
+                                Обязательный расчет силового каркаса модульного здания на
+                                прочностные ветровые и снеговые характеристики региона для установки
+                                с учетом сейсмичности района;
+                            </li>
+                            <li>
+                                Расчет теплопотерь здания для определения оптимальной толщины
+                                стеновых, кровельных панелей и основания.
+                            </li>
+                            <li>Разработка всех инженерных систем:</li>
+                            <li>
+                                Газоснабжение, отопление, водоснабжение, водоотведение, канализация,
+                                электрические сети, вентиляция и кондиционирование с расчетом
+                                воздухообмена, пожарная и охранная сигнализации, видеонаблюдение,
+                                система контроля и управления доступом (СКУД).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <div className='w-full pt-5 pb-7 max-w-[1642px] h-fit flex flex-col justify-center gap-y-4'>
                     <h3 className='text-center text-base-gray font-regular text-2xl w-fit px-2 pm2 '>
                         Категории
@@ -112,10 +144,10 @@ export default function ModulesTowers() {
                     <div className='max-w-[1726px] flex flex-col items-center justify-center py-20 px-2'>
                         <div className='text-center'>
                             <h3 className='text-2xl md:text-4xl font-thin text-base-gray mb-4'>
-                                Пока ничего не построили
+                                Пока ничего не спроектировали
                             </h3>
                             <p className='text-lg md:text-xl text-gray-600'>
-                                Наши объекты появятся здесь в ближайшее время
+                                Наши проекты появятся здесь в ближайшее время
                             </p>
                         </div>
                     </div>

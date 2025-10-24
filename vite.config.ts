@@ -9,5 +9,8 @@ export default defineConfig(({ mode }) => {
             'process.env.PRIVATE_KEY_RECAPTCHA': JSON.stringify(env.PRIVATE_KEY_RECAPTCHA),
         },
         plugins: [react()],
+        server: {
+            historyApiFallback: true,
+        },
     };
 });

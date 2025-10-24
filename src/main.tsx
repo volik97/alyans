@@ -4,7 +4,7 @@ import App from './components/app/App.tsx';
 import './index.css';
 import { ThemeProvider } from '@material-tailwind/react';
 import { ParallaxProvider } from 'react-scroll-parallax';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { setupStore } from './components/store/store.ts';
 
@@ -15,9 +15,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Provider store={store}>
             <ParallaxProvider>
                 <ThemeProvider>
-                    <HashRouter>
+                    <BrowserRouter>
                         <App />
-                    </HashRouter>
+                    </BrowserRouter>
                 </ThemeProvider>
             </ParallaxProvider>
         </Provider>

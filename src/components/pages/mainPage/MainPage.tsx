@@ -1,7 +1,7 @@
 import { YMaps } from '@pbe/react-yandex-maps';
 import Contacts from '../../blocks/Contacts/contact';
 import Hero from '../../blocks/Hero/Hero';
-import UsProjects from '../../blocks/UsProjects/UsProjects';
+// import UsProjects from '../../blocks/UsProjects/UsProjects';
 import Faq from '../../blocks/faq/faq.tsx';
 import Advantages from '../../blocks/Advantages/Advantages.tsx';
 import FormCallback from '../../blocks/form/FormCallback.tsx';
@@ -10,7 +10,7 @@ export default function MainPage() {
     return (
         <>
             <Hero title='МОДУЛЬНЫЕ' subtitle='БЫСТРОВОЗВОДИМЫЕ' description='ЗДАНИЯ' />
-            <UsProjects />
+            {/* <UsProjects /> */}
             <Advantages />
             <Faq />
             <FormCallback />

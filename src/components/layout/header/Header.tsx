@@ -18,24 +18,6 @@ function Header() {
                     Главная
                 </p>
             </NavLink>
-            <NavLink to={'/moduls'}>
-                <p
-                    className={
-                        'font-thin text-base-gray text-xl lg:text-2xl hover:scale-105 transition duration-200'
-                    }
-                >
-                    Портфолио
-                </p>
-            </NavLink>
-            <NavLink to={'/contacts'}>
-                <p
-                    className={
-                        'font-thin text-base-gray text-xl lg:text-2xl hover:scale-105 transition duration-200'
-                    }
-                >
-                    Контакты
-                </p>
-            </NavLink>
             <NavLink to={'/about'}>
                 <p
                     className={
@@ -45,6 +27,24 @@ function Header() {
                     О компании
                 </p>
             </NavLink>
+            <NavLink to={'/moduls'}>
+                <p
+                    className={
+                        'font-thin text-base-gray text-xl lg:text-2xl hover:scale-105 transition duration-200'
+                    }
+                >
+                    Портфолио
+                </p>
+            </NavLink>
+            {/* <NavLink to={'/projects'}>
+                <p
+                    className={
+                        'font-thin text-base-gray text-xl lg:text-2xl hover:scale-105 transition duration-200'
+                    }
+                >
+                    Проекты
+                </p>
+            </NavLink> */}
             <NavLink to={'/news'}>
                 <p
                     className={
@@ -52,6 +52,15 @@ function Header() {
                     }
                 >
                     Новости
+                </p>
+            </NavLink>
+            <NavLink to={'/contacts'}>
+                <p
+                    className={
+                        'font-thin text-base-gray text-xl lg:text-2xl hover:scale-105 transition duration-200'
+                    }
+                >
+                    Контакты
                 </p>
             </NavLink>
         </div>
